@@ -1,5 +1,5 @@
 from PIL import Image, ImageDraw, ImageFont
-
+from gui import App
 
 def main():
 
@@ -15,6 +15,23 @@ def main():
     # Make unit tests accordingly.
     # Make the documentation for it and comments too.
     # Test it and Submit it as Final Project of CS50P.
+
+    app = App()
+
+    def button_working():
+        print("Button is working!")
+    app.create_button(text="Working?", command=button_working)
+
+    def button_new():
+        print("New Button is working!")
+    app.create_button(text="New button?", command=button_new)
+
+
+
+
+
+
+    app.mainloop()
 
 
 if __name__ == "__main__":
