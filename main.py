@@ -1,9 +1,10 @@
 from PIL import Image, ImageDraw, ImageFont
-import customtkinter as ctk
+
 
 def main():
 
-
+    pass
+    # This is the main function to run the project.
     # First Learn GUI with Tkinter.
     # Maybe design a structure with Canva or maybe other more effective free website available for it.
     # Make the logical structure and decide which functions to add.
