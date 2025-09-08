@@ -18,7 +18,7 @@ def main():
 
     gui.startup_window()
 
-    gui.folder_selector_window()  # This function is not working properly yet.
+    gui.folder_selector_window()
 
     gui.final_window()
 
