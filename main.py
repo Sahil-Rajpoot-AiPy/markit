@@ -1,5 +1,5 @@
 from PIL import Image, ImageDraw, ImageFont
-from gui import App
+import gui
 
 def main():
 
@@ -16,22 +16,12 @@ def main():
     # Make the documentation for it and comments too.
     # Test it and Submit it as Final Project of CS50P.
 
-    app = App()
+    gui.startup_window()
 
-    def button_working():
-        print("Button is working!")
-    app.create_button(text="Working?", command=button_working)
+    gui.folder_selector_window()  # This function is not working properly yet.
 
-    def button_new():
-        print("New Button is working!")
-    app.create_button(text="New button?", command=button_new)
+    gui.final_window()
 
-
-
-
-
-
-    app.mainloop()
 
 
 if __name__ == "__main__":
