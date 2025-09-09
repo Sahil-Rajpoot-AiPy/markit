@@ -43,6 +43,7 @@ def startup_window():
     app = App()
     center_window(app, 600, 600) # Center the window on the screen
 
+
     app.create_button(row =2, column=0, text="Close", command=app.next_win_button, sticky="ew")
     app.mainloop()
 
