@@ -1,5 +1,7 @@
+import config
 import sys
 import customtkinter as ctk
+from PIL import Image
 from tkinter import filedialog
 
 prev_window = None # Global variable to store previous window geometry
@@ -14,17 +16,28 @@ class App(ctk.CTk):
         self.attributes("-alpha", 1.0)
 
 
-    def create_button(self, row, column, text, command, sticky):
+    def create_button(self, row, column, text, command, sticky=None, height=None, width=None, font=None):
         """Create button and set them in grid"""
-        button = ctk.CTkButton(self, text=text, command=command)
+        
+        kwargs = {"text":text, "command":command}
+        # Creating and adding dic so default parameters don't become None causing errors.
+        if height is not None:
+            kwargs["height"] = height
+        if width is not None:
+            kwargs["width"] = width
+        if font is not None:
+            kwargs["font"] = font
+
+        button = ctk.CTkButton(self, **kwargs)
         button.grid(row=row, column=column, padx=20, pady=(20, 20), sticky=sticky)
 
 
     def next_win_button(self):
         """Saves the current window geometry and closes the window."""
         global prev_window
-        prev_window = f"{self.winfo_width()}x{self.winfo_height()}+{self.winfo_x()}+{self.winfo_y()}"
-        self.destroy()
+        root = self.winfo_toplevel()
+        prev_window = f"{root.winfo_width()}x{root.winfo_height()}+{root.winfo_x()}+{root.winfo_y()}"
+        root.destroy()
 
 
 
@@ -43,8 +56,24 @@ def startup_window():
     app = App()
     center_window(app, 600, 600) # Center the window on the screen
 
+    # Created 3 rows and 1 column
+    app.grid_rowconfigure(0, weight=4)
+    app.grid_rowconfigure((0,1), weight=1)
+    app.grid_columnconfigure(0, weight =1)
 
-    app.create_button(row =2, column=0, text="Close", command=app.next_win_button, sticky="ew")
+    # Opened image stored into the label to display in first row and column.
+    img = ctk.CTkImage(light_image=Image.open(config.HOME_IMG_PATH), size=(600, 400))
+    image_label = ctk.CTkLabel(app, image=img, text="")
+    image_label.grid(row=0, column=0, sticky = "nsew")
+
+    # Created Tagline in the Second row.
+    tagline = ctk.CTkLabel(app, text="Bulk brand your photos. Protect your creativity.", font=("Arial", 24, "bold"))
+    tagline.grid(row=1, column=0)
+
+    # Created Button in Last row to open next Page.
+    app.create_button(row=2, column=0, text="Start", font=("Arial", 16, "bold"),
+                      command=app.next_win_button, height=50, width=200)
+
     app.mainloop()
 
 
@@ -57,9 +86,9 @@ def folder_selector_window():
         folder_path = filedialog.askdirectory()
         print(f"Selected folder: {folder_path}")
 
-    app2.create_button(row =2, column=0, text="Select Folder", command=folder_selector, sticky="ew")
+    app2.create_button(row =0, column=0, text="Select Folder", command=folder_selector, sticky="ew")
 
-    app2.create_button(row =5, column=0, text="Close", command=app2.next_win_button, sticky="n")
+    app2.create_button(row =0, column=0, text="Start Processing", command=app2.next_win_button, sticky="n")
     app2.mainloop()
 
 
