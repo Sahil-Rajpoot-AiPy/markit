@@ -84,7 +84,7 @@ def folder_selector_window():
 
     # Created 5rows and 2columns grid system.
     app2.grid_rowconfigure((0,1), weight=1)
-    app2.grid_rowconfigure(2, weight=2)
+    app2.grid_rowconfigure(2, weight=6)
     app2.grid_rowconfigure((3,4), weight=1)
     app2.grid_columnconfigure((0,1), weight=1)
 
@@ -114,12 +114,57 @@ def folder_selector_window():
 
     # Created and placed Third Row
 
-    # Make a grid of one row and two columns.
-    # Put two frames in each of them.
-    # Make grids in left frame of three rows and two columns.
-         #Put a label in colum 0 of every row and respective widget in column 1 for applying settings.
-    # Put a preview window in Right frame to show how their logo looks on images.
+    # Making a Frame inside main window, row 3, column 1/left side.
+    left_frame_3 = ctk.CTkFrame(app2, bg_color="transparent")
+    left_frame_3.grid(row=2, column=0, sticky="nsew")
 
+    # Making a Frame inside main window, row 3, column 2/right side.
+    right_frame_3 = ctk.CTkFrame(app2, fg_color="grey", corner_radius=25)
+    right_frame_3.grid(row=2, column=1, sticky="nsew")
+
+    # Make Grid in left_frame_3 of 3 rows and 2 columns.
+    left_frame_3.grid_rowconfigure((0, 1, 2), weight=1)
+    left_frame_3.grid_columnconfigure((0,1),weight=1)
+
+    # Inside 3rd row left frame created and placed first row.
+    ctk.CTkLabel(left_frame_3, text="Set Transparency",
+                 font=("Arial", 16, "bold")).grid(row=0, column=0, sticky="w", padx=20)
+
+    def folder_selector():
+        folder_path = filedialog.askdirectory()
+        print(f"Yet to be made: {folder_path}")
+
+    ctk.CTkButton(left_frame_3, text="TO Build", command=folder_selector,
+                       font=("Arial", 16, "bold")).grid(row=0, column=1, sticky="ew", padx=10)
+
+    # Inside 3rd row left frame created and placed second row.
+    ctk.CTkLabel(left_frame_3, text="Set Size",
+                 font=("Arial", 16, "bold")).grid(row=1, column=0, sticky="w", padx=20)
+
+    def folder_selector():
+        folder_path = filedialog.askdirectory()
+        print(f"Yet to be made: {folder_path}")
+
+    ctk.CTkButton(left_frame_3, text="TO Build", command=folder_selector,
+                  font=("Arial", 16, "bold")).grid(row=1, column=1, sticky="ew", padx=10)
+
+    # Inside 3rd row left frame created and placed third row.
+    ctk.CTkLabel(left_frame_3, text="Select placement",
+                 font=("Arial", 16, "bold")).grid(row=2, column=0, sticky="w", padx=20)
+
+    def folder_selector():
+        folder_path = filedialog.askdirectory()
+        print(f"Yet to be made: {folder_path}")
+
+    ctk.CTkButton(left_frame_3, text="TO Build", command=folder_selector,
+                  font=("Arial", 16, "bold")).grid(row=2, column=1, sticky="ew", padx=10)
+
+    # Inside 3rd row right frame create and place a preview to see setting applied live.
+
+
+
+
+    
 
     # Created and place Fourth Row
     ctk.CTkLabel(app2, text="Save Results *",
