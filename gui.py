@@ -59,7 +59,7 @@ def startup_window():
     # Created 3 rows and 1 column
     app.grid_rowconfigure(0, weight=4)
     app.grid_rowconfigure((0,1), weight=1)
-    app.grid_columnconfigure(0, weight =1)
+    app.grid_columnconfigure(0, weight=1)
 
     # Opened image stored into the label to display in first row and column.
     img = ctk.CTkImage(light_image=Image.open(config.HOME_IMG_PATH), size=(600, 400))
@@ -78,17 +78,66 @@ def startup_window():
 
 
 def folder_selector_window():
-    """Creates and runs the folder selector window."""
+    """Creates and runs the folder selector and setup's window."""
     app2 = App()
     app2.geometry(prev_window)
+
+    # Created 5rows and 2columns grid system.
+    app2.grid_rowconfigure((0,1), weight=1)
+    app2.grid_rowconfigure(2, weight=2)
+    app2.grid_rowconfigure((3,4), weight=1)
+    app2.grid_columnconfigure((0,1), weight=1)
+
+
+    # Create and placed First Row
+    ctk.CTkLabel(app2, text="Images to Watermark *", font=("Arial", 20, "bold")).grid(row=0, column=0, sticky="w",padx=20)
 
     def folder_selector():
         folder_path = filedialog.askdirectory()
         print(f"Selected folder: {folder_path}")
 
-    app2.create_button(row =0, column=0, text="Select Folder", command=folder_selector, sticky="ew")
+    app2.create_button(row =0, column=1, text="Select Folder", command=folder_selector, height=35, width=150,
+                       font=("Arial", 16, "bold"), sticky="e")
 
-    app2.create_button(row =0, column=0, text="Start Processing", command=app2.next_win_button, sticky="n")
+
+    # Created and placed Second Row
+    ctk.CTkLabel(app2, text="Select .png to apply on all *",
+                 font=("Arial", 20, "bold")).grid(row=1, column=0, sticky="w",padx=20)
+
+    def folder_selector():
+        folder_path = filedialog.askdirectory()
+        print(f"Selected folder: {folder_path}")
+
+    app2.create_button(row =1, column=1, text="Logo/Watermark", command=folder_selector, height=35, width=150,
+                       font=("Arial", 16, "bold"), sticky="e")
+
+
+    # Created and placed Third Row
+
+    # Make a grid of one row and two columns.
+    # Put two frames in each of them.
+    # Make grids in left frame of three rows and two columns.
+         #Put a label in colum 0 of every row and respective widget in column 1 for applying settings.
+    # Put a preview window in Right frame to show how their logo looks on images.
+
+
+    # Created and place Fourth Row
+    ctk.CTkLabel(app2, text="Save Results *",
+                 font=("Arial", 20, "bold")).grid(row=3, column=0, sticky="w", padx=20)
+
+    def folder_selector():
+        folder_path = filedialog.askdirectory()
+        print(f"Selected folder: {folder_path}")
+
+    app2.create_button(row=3, column=1, text="Select Folder", command=folder_selector, height=35, width=150,
+                       font=("Arial", 16, "bold"), sticky="e")
+
+
+    # Created and placed Fifth Row
+    ctk.CTkLabel(app2, text="Must setup all * options", font=("Arial", 20, "bold")).grid(row=4, column=0, sticky="w", padx= 20)
+
+    app2.create_button(row =4, column=1, text="Start Processing", height=35, width=150, font=("Arial", 16, "bold"),
+                       command=app2.next_win_button, sticky="e")
     app2.mainloop()
 
 
