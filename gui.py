@@ -2,9 +2,14 @@ import config
 import sys
 import customtkinter as ctk
 from PIL import Image
-from tkinter import filedialog
+# from files_utils import folder_selector, png_selector
+import files_utils as files
 
 prev_window = None # Global variable to store previous window geometry
+
+
+
+
 
 class App(ctk.CTk):
     def __init__(self):
@@ -40,7 +45,6 @@ class App(ctk.CTk):
         root.destroy()
 
 
-
 def center_window(window, width, height):
     """Centers a Tkinter window on the screen."""
     screen_width = window.winfo_screenwidth()
@@ -48,6 +52,7 @@ def center_window(window, width, height):
     x = int((screen_width / 2) - (width / 2))
     y = int((screen_height / 2) - (height / 2))
     window.geometry(f"{width}x{height}+{x}+{y}")
+
 
 
 
@@ -92,23 +97,15 @@ def folder_selector_window():
     # Create and placed First Row
     ctk.CTkLabel(app2, text="Images to Watermark *", font=("Arial", 20, "bold")).grid(row=0, column=0, sticky="w",padx=20)
 
-    def folder_selector():
-        folder_path = filedialog.askdirectory()
-        print(f"Selected folder: {folder_path}")
-
-    app2.create_button(row =0, column=1, text="Select Folder", command=folder_selector, height=35, width=150,
-                       font=("Arial", 16, "bold"), sticky="e")
+    app2.create_button(row =0, column=1, text="Select Folder", command=files.img_list,
+                       height=35, width=150, font=("Arial", 16, "bold"), sticky="e")
 
 
     # Created and placed Second Row
     ctk.CTkLabel(app2, text="Select .png to apply on all *",
                  font=("Arial", 20, "bold")).grid(row=1, column=0, sticky="w",padx=20)
 
-    def folder_selector():
-        folder_path = filedialog.askdirectory()
-        print(f"Selected folder: {folder_path}")
-
-    app2.create_button(row =1, column=1, text="Logo/Watermark", command=folder_selector, height=35, width=150,
+    app2.create_button(row =1, column=1, text="Logo/Watermark", command=files.png_selector, height=35, width=150,
                        font=("Arial", 16, "bold"), sticky="e")
 
 
@@ -130,33 +127,22 @@ def folder_selector_window():
     ctk.CTkLabel(left_frame_3, text="Set Transparency",
                  font=("Arial", 16, "bold")).grid(row=0, column=0, sticky="w", padx=20)
 
-    def folder_selector():
-        folder_path = filedialog.askdirectory()
-        print(f"Yet to be made: {folder_path}")
 
-    ctk.CTkButton(left_frame_3, text="TO Build", command=folder_selector,
+    ctk.CTkButton(left_frame_3, text="TO Build", command=files.png_selector,
                        font=("Arial", 16, "bold")).grid(row=0, column=1, sticky="ew", padx=10)
 
     # Inside 3rd row left frame created and placed second row.
     ctk.CTkLabel(left_frame_3, text="Set Size",
                  font=("Arial", 16, "bold")).grid(row=1, column=0, sticky="w", padx=20)
 
-    def folder_selector():
-        folder_path = filedialog.askdirectory()
-        print(f"Yet to be made: {folder_path}")
-
-    ctk.CTkButton(left_frame_3, text="TO Build", command=folder_selector,
+    ctk.CTkButton(left_frame_3, text="TO Build", command=files.png_selector,
                   font=("Arial", 16, "bold")).grid(row=1, column=1, sticky="ew", padx=10)
 
     # Inside 3rd row left frame created and placed third row.
     ctk.CTkLabel(left_frame_3, text="Select placement",
                  font=("Arial", 16, "bold")).grid(row=2, column=0, sticky="w", padx=20)
 
-    def folder_selector():
-        folder_path = filedialog.askdirectory()
-        print(f"Yet to be made: {folder_path}")
-
-    ctk.CTkButton(left_frame_3, text="TO Build", command=folder_selector,
+    ctk.CTkButton(left_frame_3, text="TO Build", command=files.png_selector,
                   font=("Arial", 16, "bold")).grid(row=2, column=1, sticky="ew", padx=10)
 
     # Inside 3rd row right frame create and place a preview to see setting applied live.
@@ -170,12 +156,8 @@ def folder_selector_window():
     ctk.CTkLabel(app2, text="Save Results *",
                  font=("Arial", 20, "bold")).grid(row=3, column=0, sticky="w", padx=20)
 
-    def folder_selector():
-        folder_path = filedialog.askdirectory()
-        print(f"Selected folder: {folder_path}")
-
-    app2.create_button(row=3, column=1, text="Select Folder", command=folder_selector, height=35, width=150,
-                       font=("Arial", 16, "bold"), sticky="e")
+    app2.create_button(row=3, column=1, text="Select Folder", command=files.final_folder,
+                       height=35, width=150, font=("Arial", 16, "bold"), sticky="e")
 
 
     # Created and placed Fifth Row

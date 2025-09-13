@@ -2,7 +2,7 @@ DEFAULT_INPUT_DIR = "data/input"
 
 DEFAULT_OUTPUT_DIR = "data/output"
 
-ALLOWED_EXTENSIONS = (".jpg", ".png")
+ALLOWED_EXTENSIONS = (".png", ".jpg", ".jpeg", ".webp", ".bmp", ".bm", ".bitmap", ".tiff", ".tif")
 
 APP_TITLE = "MarkIt"
 
