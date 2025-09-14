@@ -2,7 +2,7 @@ import config
 import sys
 import customtkinter as ctk
 from PIL import Image
-# from files_utils import folder_selector, png_selector
+import img_utils as imgs
 import files_utils as files
 
 prev_window = None # Global variable to store previous window geometry
@@ -93,11 +93,19 @@ def folder_selector_window():
     app2.grid_rowconfigure((3,4), weight=1)
     app2.grid_columnconfigure((0,1), weight=1)
 
+    # Making a Frame inside main window, row 3, column 1/left side.
+    left_frame_3 = ctk.CTkFrame(app2, bg_color="transparent")
+    left_frame_3.grid(row=2, column=0, sticky="nsew")
+
+    # Making a Frame inside main window, row 3, column 2/right side.
+    right_frame_3 = ctk.CTkFrame(app2, fg_color="grey", corner_radius=25)
+    right_frame_3.grid(row=2, column=1, sticky="nsew")
+
 
     # Create and placed First Row
     ctk.CTkLabel(app2, text="Images to Watermark *", font=("Arial", 20, "bold")).grid(row=0, column=0, sticky="w",padx=20)
 
-    app2.create_button(row =0, column=1, text="Select Folder", command=files.img_list,
+    app2.create_button(row =0, column=1, text="Select Folder", command=lambda: files.img_list(left_frame_3),
                        height=35, width=150, font=("Arial", 16, "bold"), sticky="e")
 
 
@@ -110,14 +118,6 @@ def folder_selector_window():
 
 
     # Created and placed Third Row
-
-    # Making a Frame inside main window, row 3, column 1/left side.
-    left_frame_3 = ctk.CTkFrame(app2, bg_color="transparent")
-    left_frame_3.grid(row=2, column=0, sticky="nsew")
-
-    # Making a Frame inside main window, row 3, column 2/right side.
-    right_frame_3 = ctk.CTkFrame(app2, fg_color="grey", corner_radius=25)
-    right_frame_3.grid(row=2, column=1, sticky="nsew")
 
     # Make Grid in left_frame_3 of 3 rows and 2 columns.
     left_frame_3.grid_rowconfigure((0, 1, 2), weight=1)
@@ -146,6 +146,9 @@ def folder_selector_window():
                   font=("Arial", 16, "bold")).grid(row=2, column=1, sticky="ew", padx=10)
 
     # Inside 3rd row right frame create and place a preview to see setting applied live.
+    # def preview(frame, path):
+    #     bg_preview = imgs.open_bg(right_frame_3)
+
 
 
 

@@ -1,12 +1,14 @@
 import os
 from tkinter import filedialog
 import config
+import img_utils as imgs
+import gui
 
-# input_folder = ""
+
 output_folder = ""
 png_file = ""
 input_imgs_list = []
-
+preview_switch = False
 
 
 def png_selector():
@@ -19,8 +21,8 @@ def final_folder():
     output_folder = filedialog.askdirectory()
 
 
-def img_list():
-    global input_imgs_list
+def img_list(prev_frame):
+    global input_imgs_list, preview_switch
     while True:
         folder = filedialog.askdirectory()
         input_imgs_list.clear()
@@ -31,6 +33,8 @@ def img_list():
 
         if len(input_imgs_list) >= 1:
             print(f"{len(input_imgs_list)} images found")
+            # gui.preview(prev_frame)
+            imgs.open_bg(prev_frame)
             break
         else:
             print("No image found")

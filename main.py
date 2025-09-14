@@ -1,4 +1,3 @@
-from PIL import Image, ImageDraw, ImageFont
 import gui
 import files_utils as files
 
