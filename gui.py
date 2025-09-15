@@ -4,6 +4,7 @@ import customtkinter as ctk
 from PIL import Image
 import img_utils as imgs
 import files_utils as files
+from tkinter import messagebox
 
 prev_window = None # Global variable to store previous window geometry
 
@@ -44,6 +45,12 @@ class App(ctk.CTk):
         prev_window = f"{root.winfo_width()}x{root.winfo_height()}+{root.winfo_x()}+{root.winfo_y()}"
         root.destroy()
 
+    def start_process(self):
+        """If all requirements are done then Saves the current window geometry and closes the window."""
+        if files.output_folder and files.png_file and files.input_imgs_list:
+            self.next_win_button()
+        else:
+            messagebox.showinfo("Error", "Must select all * options before starting")
 
 def center_window(window, width, height):
     """Centers a Tkinter window on the screen."""
@@ -89,23 +96,23 @@ def folder_selector_window():
 
     # Created 5rows and 2columns grid system.
     app2.grid_rowconfigure((0,1), weight=1)
-    app2.grid_rowconfigure(2, weight=6)
-    app2.grid_rowconfigure((3,4), weight=1)
+    app2.grid_rowconfigure((2,3,4), weight=2)
+    app2.grid_rowconfigure((5,6), weight=1)
     app2.grid_columnconfigure((0,1), weight=1)
 
-    # Making a Frame inside main window, row 3, column 1/left side.
-    left_frame_3 = ctk.CTkFrame(app2, bg_color="transparent")
-    left_frame_3.grid(row=2, column=0, sticky="nsew")
-
-    # Making a Frame inside main window, row 3, column 2/right side.
-    right_frame_3 = ctk.CTkFrame(app2, fg_color="grey", corner_radius=25)
-    right_frame_3.grid(row=2, column=1, sticky="nsew")
+    # # Making a Frame inside main window, row 3, column 1/left side.
+    # left_frame_3 = ctk.CTkFrame(app2, bg_color="transparent")
+    # left_frame_3.grid(row=2, column=0, sticky="nsew")
+    #
+    # # Making a Frame inside main window, row 3, column 2/right side.
+    # right_frame_3 = ctk.CTkFrame(app2, fg_color="grey", corner_radius=25)
+    # right_frame_3.grid(row=2, column=1, sticky="nsew")
 
 
     # Create and placed First Row
     ctk.CTkLabel(app2, text="Images to Watermark *", font=("Arial", 20, "bold")).grid(row=0, column=0, sticky="w",padx=20)
 
-    app2.create_button(row =0, column=1, text="Select Folder", command=lambda: files.img_list(left_frame_3),
+    app2.create_button(row =0, column=1, text="Select Folder", command=files.img_list,
                        height=35, width=150, font=("Arial", 16, "bold"), sticky="e")
 
 
@@ -117,57 +124,59 @@ def folder_selector_window():
                        font=("Arial", 16, "bold"), sticky="e")
 
 
+    # Created and placed Third,Fourth,Fifth Rows
+
+    ## Make Grid in left_frame_3 of 3 rows and 2 columns.
+    # left_frame_3.grid_rowconfigure((0, 1, 2), weight=1)
+    # left_frame_3.grid_columnconfigure((0,1),weight=1)
+
     # Created and placed Third Row
-
-    # Make Grid in left_frame_3 of 3 rows and 2 columns.
-    left_frame_3.grid_rowconfigure((0, 1, 2), weight=1)
-    left_frame_3.grid_columnconfigure((0,1),weight=1)
-
-    # Inside 3rd row left frame created and placed first row.
-    ctk.CTkLabel(left_frame_3, text="Set Transparency",
-                 font=("Arial", 16, "bold")).grid(row=0, column=0, sticky="w", padx=20)
-
-
-    ctk.CTkButton(left_frame_3, text="TO Build", command=files.png_selector,
-                       font=("Arial", 16, "bold")).grid(row=0, column=1, sticky="ew", padx=10)
-
-    # Inside 3rd row left frame created and placed second row.
-    ctk.CTkLabel(left_frame_3, text="Set Size",
-                 font=("Arial", 16, "bold")).grid(row=1, column=0, sticky="w", padx=20)
-
-    ctk.CTkButton(left_frame_3, text="TO Build", command=files.png_selector,
-                  font=("Arial", 16, "bold")).grid(row=1, column=1, sticky="ew", padx=10)
-
-    # Inside 3rd row left frame created and placed third row.
-    ctk.CTkLabel(left_frame_3, text="Select placement",
+    ctk.CTkLabel(app2, text="Set Transparency",
                  font=("Arial", 16, "bold")).grid(row=2, column=0, sticky="w", padx=20)
 
-    ctk.CTkButton(left_frame_3, text="TO Build", command=files.png_selector,
-                  font=("Arial", 16, "bold")).grid(row=2, column=1, sticky="ew", padx=10)
 
-    # Inside 3rd row right frame create and place a preview to see setting applied live.
-    # def preview(frame, path):
-    #     bg_preview = imgs.open_bg(right_frame_3)
+    ctk.CTkButton(app2, text="TO Build", command=files.png_selector,
+                       font=("Arial", 16, "bold")).grid(row=2, column=1, sticky="ew", padx=10)
 
+    # Created and placed Fourth Row
+    ctk.CTkLabel(app2, text="Set Size",
+                 font=("Arial", 16, "bold")).grid(row=3, column=0, sticky="w", padx=20)
+
+    ctk.CTkButton(app2, text="TO Build", command=files.png_selector,
+                  font=("Arial", 16, "bold")).grid(row=3, column=1, sticky="ew", padx=10)
+
+    # Created and placed Fifth Row
+    ctk.CTkLabel(app2, text="Select placement",
+                 font=("Arial", 16, "bold")).grid(row=4, column=0, sticky="w", padx=20)
+
+    ctk.CTkButton(app2, text="TO Build", command=files.png_selector,
+                  font=("Arial", 16, "bold")).grid(row=4, column=1, sticky="ew", padx=10)
 
 
 
 
     
 
-    # Created and place Fourth Row
+    # Created and place sixth Row
     ctk.CTkLabel(app2, text="Save Results *",
-                 font=("Arial", 20, "bold")).grid(row=3, column=0, sticky="w", padx=20)
+                 font=("Arial", 20, "bold")).grid(row=5, column=0, sticky="w", padx=20)
 
-    app2.create_button(row=3, column=1, text="Select Folder", command=files.final_folder,
+    app2.create_button(row=5, column=1, text="Select Folder", command=files.final_folder,
                        height=35, width=150, font=("Arial", 16, "bold"), sticky="e")
 
 
-    # Created and placed Fifth Row
-    ctk.CTkLabel(app2, text="Must setup all * options", font=("Arial", 20, "bold")).grid(row=4, column=0, sticky="w", padx= 20)
+    # Created and placed seventh Row
 
-    app2.create_button(row =4, column=1, text="Start Processing", height=35, width=150, font=("Arial", 16, "bold"),
-                       command=app2.next_win_button, sticky="e")
+    # ctk.CTkLabel(app2, text="Must setup all * options", font=("Arial", 20, "bold")).grid(row=6, column=0, sticky="w", padx= 20)
+
+    app2.create_button(row=6, column=0, text="Batch Test", height=35, width=150, font=("Arial", 16, "bold"),
+                       command=imgs.batch_test, sticky="w")
+
+
+    app2.create_button(row =6, column=1, text="Start Processing", height=35, width=150, font=("Arial", 16, "bold"),
+                       command=app2.start_process, sticky="e")
+
+
     app2.mainloop()
 
 

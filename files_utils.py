@@ -21,7 +21,7 @@ def final_folder():
     output_folder = filedialog.askdirectory()
 
 
-def img_list(prev_frame):
+def img_list():
     global input_imgs_list, preview_switch
     while True:
         folder = filedialog.askdirectory()
@@ -34,7 +34,7 @@ def img_list(prev_frame):
         if len(input_imgs_list) >= 1:
             print(f"{len(input_imgs_list)} images found")
             # gui.preview(prev_frame)
-            imgs.open_bg(prev_frame)
+            # imgs.open_bg(prev_frame)
             break
         else:
             print("No image found")

@@ -1,6 +1,7 @@
 from PIL import Image, ImageDraw, ImageFont
 import files_utils as files
 import customtkinter as ctk
+from tkinter import messagebox
 
 
 
@@ -9,9 +10,18 @@ def open_wm_png(master):
     ctk_png = ctk.CTkImage(wm_png)
     label = ctk.CTkLabel(master=master, image=ctk_png, text="")
     label.img = ctk_png
+    return label.img
 
-def open_bg(master):
-    bg = Image.open(files.input_imgs_list[0])
-    ctk_png = ctk.CTkImage(wm_png)
-    ctk.CTkLabel(master=master, image=bg, text="")
+def def_logo_setting():
+    pass
 
+def batch_test():
+    if files.output_folder and files.png_file and files.input_imgs_list:
+        print("Function is in building process")
+    else:
+        messagebox.showinfo("Error", "Must select all * options before Batch Test")
+
+
+
+def img_processing():
+    pass
