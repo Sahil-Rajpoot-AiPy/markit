@@ -1,4 +1,5 @@
 import gui
+
 import files_utils as files
 
 def main():
@@ -24,6 +25,7 @@ def main():
     print(f"Files list from folder selected: {files.input_imgs_list}")
     print(f"PNG Image Path: {files.png_file}")
     print(f"Final folder to save images: {files.output_folder}")
+
 
     gui.final_window()
 

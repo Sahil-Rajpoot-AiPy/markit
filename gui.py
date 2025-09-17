@@ -100,13 +100,6 @@ def folder_selector_window():
     app2.grid_rowconfigure((5,6), weight=1)
     app2.grid_columnconfigure((0,1), weight=1)
 
-    # # Making a Frame inside main window, row 3, column 1/left side.
-    # left_frame_3 = ctk.CTkFrame(app2, bg_color="transparent")
-    # left_frame_3.grid(row=2, column=0, sticky="nsew")
-    #
-    # # Making a Frame inside main window, row 3, column 2/right side.
-    # right_frame_3 = ctk.CTkFrame(app2, fg_color="grey", corner_radius=25)
-    # right_frame_3.grid(row=2, column=1, sticky="nsew")
 
 
     # Create and placed First Row
@@ -126,9 +119,6 @@ def folder_selector_window():
 
     # Created and placed Third,Fourth,Fifth Rows
 
-    ## Make Grid in left_frame_3 of 3 rows and 2 columns.
-    # left_frame_3.grid_rowconfigure((0, 1, 2), weight=1)
-    # left_frame_3.grid_columnconfigure((0,1),weight=1)
 
     # Created and placed Third Row
     ctk.CTkLabel(app2, text="Set Transparency",
@@ -185,6 +175,16 @@ def final_window():
     app3 = App()
     app3.geometry(prev_window)
 
+    app3.grid_rowconfigure((1, 2, 3, 4, 5), weight=1)
+    app3.grid_columnconfigure(0, weight=1)
 
-    app3.create_button(row =2, column=0, text="Close", command=app3.destroy, sticky="ew")
+
+
+    imgs.img_processing()
+
+    ctk.CTkLabel(app3, text="Congratulation! All file have been watermarked.",
+                 font=("Arial", 20, "bold")).grid(row=3, column=0, padx=20)
+
+    app3.create_button(row =5, column=0, text="Close", command=app3.destroy)
+
     app3.mainloop()
