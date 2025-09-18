@@ -156,13 +156,18 @@ def folder_selector_window():
 
 
     # Created and placed Fifth Row
+    def placement_callback(choice):
+        imgs.placement = choice
+
+
     ctk.CTkLabel(app2, text="Select placement",
                  font=("Arial", 16, "bold")).grid(row=4, column=0, sticky="w", padx=20)
 
-    ctk.CTkButton(app2, text="TO Build", command=files.png_selector,
-                  font=("Arial", 16, "bold")).grid(row=4, column=1, sticky="ew", padx=10)
+    options = imgs.placement_opts
+    selected_position = ctk.StringVar(value="bottom-right")  # default value
 
-
+    dropdown = ctk.CTkOptionMenu(app2, variable=selected_position, values=options, command=placement_callback)
+    dropdown.grid(row=4, column=1, sticky="ew", padx=10)
 
 
     
