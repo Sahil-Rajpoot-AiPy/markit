@@ -126,7 +126,10 @@ def folder_selector_window():
 
 
     ctk.CTkButton(app2, text="TO Build", command=files.png_selector,
-                       font=("Arial", 16, "bold")).grid(row=2, column=1, sticky="ew", padx=10)
+                       font=("Arial", 16, "bold")).grid(row=2, column=1, sticky="e", padx=10)
+    #
+    # slider = ctk.CTkSlider(app2, from_=0, to=100,).grid(row=2, column=1, sticky="e", padx=10)
+    # imgs.opacity = slider.get()
 
     # Created and placed Fourth Row
     ctk.CTkLabel(app2, text="Set Size",

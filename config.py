@@ -11,3 +11,4 @@ ICON_PATH = "data/markit_icon.png"
 LOGO_PATH = "data/markit_logo.png"
 
 HOME_IMG_PATH = "data/mark_it_start_page.png"
+

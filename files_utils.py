@@ -8,7 +8,7 @@ import gui
 output_folder = ""
 png_file = ""
 input_imgs_list = []
-preview_switch = False
+# preview_switch = False
 
 
 def png_selector():
