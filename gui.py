@@ -94,6 +94,7 @@ def folder_selector_window():
     app2 = App()
     app2.geometry(prev_window)
 
+
     # Created 5rows and 2columns grid system.
     app2.grid_rowconfigure((0,1), weight=1)
     app2.grid_rowconfigure((2,3,4), weight=2)
@@ -121,22 +122,38 @@ def folder_selector_window():
 
 
     # Created and placed Third Row
-    ctk.CTkLabel(app2, text="Set Transparency",
-                 font=("Arial", 16, "bold")).grid(row=2, column=0, sticky="w", padx=20)
+    def opac_slider_callback(value):
+        opac_slider_label.configure(text=f"Opacity: {int(value)}%")
+        imgs.opacity = int(value)
+
+    thrd_label = ctk.CTkLabel(app2, text="Set Transparency", font=("Arial", 16, "bold"))
+    thrd_label.grid(row=2, column=0, sticky="w", padx=20)
+
+    opac_slider_label = ctk.CTkLabel(app2, text="Opacity: 100%")
+    opac_slider_label.grid(row=2, column=0, sticky="e", padx=10)
+
+    opac_slider = ctk.CTkSlider(app2, from_=0, to=100, number_of_steps=100, command=opac_slider_callback)
+    opac_slider.grid(row=2, column=1, sticky="ew", padx=10)
+    opac_slider.set(100)
 
 
-    ctk.CTkButton(app2, text="TO Build", command=files.png_selector,
-                       font=("Arial", 16, "bold")).grid(row=2, column=1, sticky="e", padx=10)
-    #
-    # slider = ctk.CTkSlider(app2, from_=0, to=100,).grid(row=2, column=1, sticky="e", padx=10)
-    # imgs.opacity = slider.get()
 
     # Created and placed Fourth Row
-    ctk.CTkLabel(app2, text="Set Size",
-                 font=("Arial", 16, "bold")).grid(row=3, column=0, sticky="w", padx=20)
+    def size_slider_callback(value):
+        size_slider_label.configure(text=f"Logo Size: {int(value)}%")
+        imgs.logo_size = int(value)
 
-    ctk.CTkButton(app2, text="TO Build", command=files.png_selector,
-                  font=("Arial", 16, "bold")).grid(row=3, column=1, sticky="ew", padx=10)
+    frth_label= ctk.CTkLabel(app2, text="Set Size", font=("Arial", 16, "bold"))
+    frth_label.grid(row=3, column=0, sticky="w", padx=20)
+
+    size_slider_label = ctk.CTkLabel(app2, text="Logo Size: 20%")
+    size_slider_label.grid(row=3, column=0, sticky="e", padx=10)
+
+    size_slider = ctk.CTkSlider(app2, from_=0, to=100, number_of_steps=100, command=size_slider_callback)
+    size_slider.grid(row=3, column=1, sticky="ew", padx=10)
+    size_slider.set(20)
+
+
 
     # Created and placed Fifth Row
     ctk.CTkLabel(app2, text="Select placement",

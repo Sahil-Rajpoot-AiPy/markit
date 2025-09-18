@@ -22,9 +22,9 @@ def open_wm_png():
 #     pass
 
 
-def auto_logo_resizing(logo, img, size=logo_size ):
+def auto_logo_resizing(logo, img):
 
-    scale_factor = size / 100
+    scale_factor = logo_size / 100
     new_width = int(img.width * scale_factor)
     aspect_ratio = logo.height / logo.width
     new_height = int(new_width * aspect_ratio)
@@ -33,8 +33,9 @@ def auto_logo_resizing(logo, img, size=logo_size ):
 
 
 
-def auto_logo_placement(logo, img, place=placement):
+def auto_logo_placement(logo, img):
     padding = 10
+    place = placement
 
     if place == "top-right":
         x = img.width - logo.width - padding
@@ -78,7 +79,9 @@ def auto_logo_placement(logo, img, place=placement):
     return x, y
 
 
-def auto_logo_transparency(logo, transparency=opacity/100):
+def auto_logo_transparency(logo):
+
+    transparency = opacity / 100
 
     # Extract alpha channel and scale its brightness
     alpha = logo.split()[3]
