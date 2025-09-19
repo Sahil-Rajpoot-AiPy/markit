@@ -1,17 +1,17 @@
-from PIL import Image, ImageEnhance
 import files_utils as files
-import os
-import customtkinter as ctk
+from PIL import Image, ImageEnhance
 from tkinter import messagebox
+import os
 
+# Placement options for watermark/logo on images
 placement_opts = ["top-left", "top-center", "top-right",
            "middle-left", "center", "middle-right",
            "bottom-left", "bottom-center", "bottom-right"]
 
-logo_size = 20
-placement = "bottom-right"
-opacity = 100
-
+# Default logo size percentage, placement, and opacity
+logo_size = 20  # Logo will be resized to 20% of image width
+placement = "bottom-right"  # Default placement of logo
+opacity = 100  # Default opacity (100% visible)
 
 
 def open_wm_png():
@@ -37,9 +37,10 @@ def auto_logo_placement(logo, img):
     """Place the logo on image according to the option user pic from drop down menu.
     By default, it will place the image to Bottom-Right"""
 
-    padding = 10
+    padding = 10 # Padding from the edges
     place = placement
 
+    # Determine coordinates based on placement option
     if place == "top-right":
         x = img.width - logo.width - padding
         y = padding
@@ -128,12 +129,9 @@ def img_processing():
     for img in files.input_imgs_list:
         image = Image.open(img)
         logo = auto_logo_resizing(logo=logo, img=image)
-
         x, y = auto_logo_placement(logo=logo, img=image)
-
         image.paste(logo, (x, y), logo)
 
         filename = os.path.basename(img)
         output_path= os.path.join(files.output_folder, filename)
-
         image.save(output_path)
