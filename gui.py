@@ -1,3 +1,7 @@
+# gui.py
+# Main GUI logic for the MarkIt watermarking application.
+# Handles window creation, user interaction, and process flow.
+
 import config
 import customtkinter as ctk
 import files_utils as files
@@ -7,23 +11,25 @@ from tkinter import messagebox
 import sys
 
 
-prev_window = None # Global variable to store previous window geometry
+prev_window = None# Stores previous window geometry for navigation
 
 class App(ctk.CTk):
+    """Custom Tkinter application class for MarkIt GUI."""
+
     def __init__(self):
         super().__init__()
-        self.geometry("600x600")
-        self.title("MarkIt")
-        self.grid_columnconfigure(0, weight=1)
-        self.protocol("WM_DELETE_WINDOW", sys.exit)
-        self.attributes("-alpha", 1.0)
+        self.geometry("600x600")  # Set initial window size
+        self.title("MarkIt")      # Set window title
+        self.grid_columnconfigure(0, weight=1)  # Make column expandable
+        self.protocol("WM_DELETE_WINDOW", sys.exit)  # Handle window close
+        self.attributes("-alpha", 1.0)  # Set window opacity
 
 
     def create_button(self, row, column, text, command, sticky=None, height=None, width=None, font=None):
-        """Create button and set them in grid"""
+        """Create a button and place it in the grid layout."""
         
         kwargs = {"text":text, "command":command}
-        # Creating and adding dic so default parameters don't become None causing errors.
+        # Add optional parameters if provided
         if height is not None:
             kwargs["height"] = height
         if width is not None:
@@ -66,26 +72,26 @@ def center_window(window, width, height):
 
 
 def startup_window():
-    """Creates and runs the startup window."""
+    """Creates and run the startup window."""
 
     app = App()
     center_window(app, 600, 600) # Center the window on the screen
 
-    # Created 3 rows and 1 column
+    # Configure grid layout for rows and columns
     app.grid_rowconfigure(0, weight=4)
     app.grid_rowconfigure((0,1), weight=1)
     app.grid_columnconfigure(0, weight=1)
 
-    # Opened image stored into the label to display in first row and column.
+    # Display home image in the first row
     img = ctk.CTkImage(light_image=Image.open(config.HOME_IMG_PATH), size=(600, 400))
     image_label = ctk.CTkLabel(app, image=img, text="")
     image_label.grid(row=0, column=0, sticky = "nsew")
 
-    # Created Tagline in the Second row.
+    # Tagline label in the second row
     tagline = ctk.CTkLabel(app, text="Bulk brand your photos. Protect your creativity.", font=("Arial", 24, "bold"))
     tagline.grid(row=1, column=0)
 
-    # Created Button in Last row to open next Page.
+    # Start button in the last row
     app.create_button(row=2, column=0, text="Start", font=("Arial", 16, "bold"),
                       command=app.next_win_button, height=50, width=200)
 
@@ -93,34 +99,34 @@ def startup_window():
 
 
 def folder_selector_window():
-    """Creates and runs the folder selector and setup's window."""
+    """Creates and run the folder selector and setup's window."""
 
     app2 = App()
-    app2.geometry(prev_window)
+    app2.geometry(prev_window)   # Restore previous window geometry
 
-    # Created 5rows and 2columns grid system.
+    # Configure grid for layout
     app2.grid_rowconfigure((0,1), weight=1)
     app2.grid_rowconfigure((2,3,4), weight=2)
     app2.grid_rowconfigure((5,6), weight=1)
     app2.grid_columnconfigure((0,1), weight=1)
 
-    # Created and placed First Row
+    # Row 0: Select input images folder
     ctk.CTkLabel(app2, text="Images to Watermark *", font=("Arial", 20, "bold")).grid(row=0, column=0, sticky="w",padx=20)
 
     app2.create_button(row =0, column=1, text="Select Folder", command=files.img_list,
                        height=35, width=150, font=("Arial", 16, "bold"), sticky="e")
 
-    # Created and placed Second Row
+    # Row 1: Select PNG logo/watermark
     ctk.CTkLabel(app2, text="Select .png to apply on all *",
                  font=("Arial", 20, "bold")).grid(row=1, column=0, sticky="w",padx=20)
 
     app2.create_button(row =1, column=1, text="Logo/Watermark", command=files.png_selector, height=35, width=150,
                        font=("Arial", 16, "bold"), sticky="e")
 
-    # Created and placed Third,Fourth,Fifth Rows
-    #### Created and placed Third Row
+    # Row 2,3,4: For optional settings
+    #### Row 2: Opacity slider and label
     def opac_slider_callback(value):
-        """Update the Opacity value every time user change slider, update the label, and also update global variable."""
+        """Update opacity value and label when slider changes."""
         opac_slider_label.configure(text=f"Opacity: {int(value)}%")
         imgs.opacity = int(value)
 
@@ -137,7 +143,7 @@ def folder_selector_window():
     opac_slider.grid(row=2, column=1, sticky="ew", padx=10)
     opac_slider.set(100)
 
-    #### Created and placed Fourth Row
+    #### Row 3: Logo size slider and label
     def size_slider_callback(value):
         """Update the Size value every time user change slider, update the label, and also update global variable."""
         size_slider_label.configure(text=f"Logo Size: {int(value)}%")
@@ -156,9 +162,9 @@ def folder_selector_window():
     size_slider.grid(row=3, column=1, sticky="ew", padx=10)
     size_slider.set(20)
 
-    #### Created and placed Fifth Row
+    #### Row 4: Logo placement dropdown
     def placement_callback(choice):
-        """Update the choice every time user selects new choice and also update global variable."""
+        """Update logo placement option when selection changes."""
         imgs.placement = choice
 
     # Label for selecting logo placement on image.
@@ -173,14 +179,14 @@ def folder_selector_window():
     dropdown.grid(row=4, column=1, sticky="ew", padx=10)
 
 
-    # Created and place sixth Row
+    # Row 5: Select output folder
     ctk.CTkLabel(app2, text="Save Results *",
                  font=("Arial", 20, "bold")).grid(row=5, column=0, sticky="w", padx=20)
 
     app2.create_button(row=5, column=1, text="Select Folder", command=files.final_folder,
                        height=35, width=150, font=("Arial", 16, "bold"), sticky="e")
 
-    # Created and placed seventh Row
+    # Row 6: Batch test and start processing buttons
     app2.create_button(row=6, column=0, text="Batch Test", height=35, width=150, font=("Arial", 16, "bold"),
                        command=imgs.batch_test, sticky="w")
 
@@ -191,20 +197,22 @@ def folder_selector_window():
 
 
 def final_window():
-    """Creates and runs the final window."""
+    """Create and run the final window after processing."""
 
-    app3 = App() # initiated new window
-    app3.geometry(prev_window)  # Set the screen size to previous window.
+    app3 = App() # New window instance
+    app3.geometry(prev_window)  # Restore previous geometry
 
-    # Setting grid in final window.
+    # Configure grid for final window
     app3.grid_rowconfigure((1, 2, 3, 4, 5), weight=1)
     app3.grid_columnconfigure(0, weight=1)
 
-    imgs.img_processing() # Processing bulk images.
+    imgs.img_processing() # Process images in bulk
 
+    # Display completion message
     ctk.CTkLabel(app3, text="Congratulation! All file have been watermarked.",
                  font=("Arial", 20, "bold")).grid(row=3, column=0, padx=20)
 
+    # Close button
     app3.create_button(row =5, column=0, text="Close", command=app3.destroy)
 
     app3.mainloop()
