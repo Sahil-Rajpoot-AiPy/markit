@@ -1,10 +1,11 @@
 import config
-import sys
 import customtkinter as ctk
+import files_utils as files
 from PIL import Image
 import img_utils as imgs
-import files_utils as files
 from tkinter import messagebox
+import sys
+
 
 prev_window = None # Global variable to store previous window geometry
 
@@ -118,7 +119,7 @@ def folder_selector_window():
     # Created and placed Third,Fourth,Fifth Rows
     #### Created and placed Third Row
     def opac_slider_callback(value):
-
+        """Update the Opacity value every time user change slider, update the label, and also update global variable."""
         opac_slider_label.configure(text=f"Opacity: {int(value)}%")
         imgs.opacity = int(value)
 
@@ -134,7 +135,7 @@ def folder_selector_window():
 
     #### Created and placed Fourth Row
     def size_slider_callback(value):
-
+        """Update the Size value every time user change slider, update the label, and also update global variable."""
         size_slider_label.configure(text=f"Logo Size: {int(value)}%")
         imgs.logo_size = int(value)
 
@@ -150,7 +151,7 @@ def folder_selector_window():
 
     #### Created and placed Fifth Row
     def placement_callback(choice):
-
+        """Update the choice every time user selects new choice and also update global variable."""
         imgs.placement = choice
 
     ctk.CTkLabel(app2, text="Select placement",
