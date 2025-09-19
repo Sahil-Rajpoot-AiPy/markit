@@ -39,6 +39,7 @@ class App(ctk.CTk):
         """Saves the current window geometry and closes the window."""
 
         global prev_window
+
         root = self.winfo_toplevel()
         prev_window = f"{root.winfo_width()}x{root.winfo_height()}+{root.winfo_x()}+{root.winfo_y()}"
         root.destroy()
@@ -103,7 +104,7 @@ def folder_selector_window():
     app2.grid_rowconfigure((5,6), weight=1)
     app2.grid_columnconfigure((0,1), weight=1)
 
-    # Create and placed First Row
+    # Created and placed First Row
     ctk.CTkLabel(app2, text="Images to Watermark *", font=("Arial", 20, "bold")).grid(row=0, column=0, sticky="w",padx=20)
 
     app2.create_button(row =0, column=1, text="Select Folder", command=files.img_list,
@@ -123,12 +124,15 @@ def folder_selector_window():
         opac_slider_label.configure(text=f"Opacity: {int(value)}%")
         imgs.opacity = int(value)
 
+    # Label for Transparency setting.
     thrd_label = ctk.CTkLabel(app2, text="Set Transparency", font=("Arial", 16, "bold"))
     thrd_label.grid(row=2, column=0, sticky="w", padx=20)
 
+    # Auto updating label for showing percentage of Transparency/Opacity.
     opac_slider_label = ctk.CTkLabel(app2, text="Opacity: 100%")
     opac_slider_label.grid(row=2, column=0, sticky="e", padx=10)
 
+    # Slider for setting and changing Opacity of logo.
     opac_slider = ctk.CTkSlider(app2, from_=0, to=100, number_of_steps=100, command=opac_slider_callback)
     opac_slider.grid(row=2, column=1, sticky="ew", padx=10)
     opac_slider.set(100)
@@ -139,12 +143,15 @@ def folder_selector_window():
         size_slider_label.configure(text=f"Logo Size: {int(value)}%")
         imgs.logo_size = int(value)
 
+    # Label for logo size setting.
     frth_label= ctk.CTkLabel(app2, text="Set Size", font=("Arial", 16, "bold"))
     frth_label.grid(row=3, column=0, sticky="w", padx=20)
 
+    # Auto updating label for showing logo size percentage related to image.
     size_slider_label = ctk.CTkLabel(app2, text="Logo Size: 20%")
     size_slider_label.grid(row=3, column=0, sticky="e", padx=10)
 
+    # Slider for setting and changing size of logo.
     size_slider = ctk.CTkSlider(app2, from_=0, to=100, number_of_steps=100, command=size_slider_callback)
     size_slider.grid(row=3, column=1, sticky="ew", padx=10)
     size_slider.set(20)
@@ -154,9 +161,11 @@ def folder_selector_window():
         """Update the choice every time user selects new choice and also update global variable."""
         imgs.placement = choice
 
+    # Label for selecting logo placement on image.
     ctk.CTkLabel(app2, text="Select placement",
                  font=("Arial", 16, "bold")).grid(row=4, column=0, sticky="w", padx=20)
 
+    # Dropdown menu for selecting place to put logo on image.
     options = imgs.placement_opts
     selected_position = ctk.StringVar(value="bottom-right")  # default value
 
@@ -184,13 +193,14 @@ def folder_selector_window():
 def final_window():
     """Creates and runs the final window."""
 
-    app3 = App()
-    app3.geometry(prev_window)
+    app3 = App() # initiated new window
+    app3.geometry(prev_window)  # Set the screen size to previous window.
 
+    # Setting grid in final window.
     app3.grid_rowconfigure((1, 2, 3, 4, 5), weight=1)
     app3.grid_columnconfigure(0, weight=1)
 
-    imgs.img_processing()
+    imgs.img_processing() # Processing bulk images.
 
     ctk.CTkLabel(app3, text="Congratulation! All file have been watermarked.",
                  font=("Arial", 20, "bold")).grid(row=3, column=0, padx=20)
