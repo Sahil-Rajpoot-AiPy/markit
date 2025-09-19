@@ -1,16 +1,20 @@
-import os
-from tkinter import filedialog
+# files_utils.py
+# Utility functions for file selection and image list management in the watermarking app.
+
 import config
+from tkinter import filedialog
+import os
 
-
-output_folder = ""
-png_file = ""
-input_imgs_list = []
-
+# Global variables to store user selections
+output_folder = ""      # Path to output folder for processed images
+png_file = ""           # Path to selected PNG logo/watermark
+input_imgs_list = []    # List of input image file path
 
 def png_selector():
-    """Open filemanager and help user select png file to
-        use as logo/watermark and save it in the global variable."""
+    """
+    Open filemanager and help user select png file to
+    use as logo/watermark and save it in the global variable.
+    """
 
     global png_file
 
@@ -18,8 +22,10 @@ def png_selector():
 
 
 def final_folder():
-    """Open filemanager to help user select the folder to save images after
-        bulk processing and save that path in global variable."""
+    """
+    Open filemanager to help user select the folder to save images after
+    bulk processing and save that path in global variable.
+    """
 
     global output_folder
 
@@ -27,20 +33,25 @@ def final_folder():
 
 
 def img_list():
-    """Validate all the supported images and save them in the global variable list."""
+    """
+    Prompts the user to select a folder, validates supported image files,
+    and stores their paths in the global input_imgs_list.
+    Only continues if at least one valid image is found.
+    """
 
     global input_imgs_list
 
     while True:
-        folder = filedialog.askdirectory()
-        input_imgs_list.clear()
+        folder = filedialog.askdirectory()  # Ask user to select input folder
+        input_imgs_list.clear()  # Clear previous selections
 
+        # Iterate over files in the selected folder
         for file in os.listdir(folder):
+            # Check if file extension is allowed
             if file.lower().endswith(config.ALLOWED_EXTENSIONS):
                 input_imgs_list.append(os.path.join(folder, file))
 
+        # If at least one image is found, print count and exit loop
         if len(input_imgs_list) >= 1:
             print(f"{len(input_imgs_list)} images found")
             break
-
-
