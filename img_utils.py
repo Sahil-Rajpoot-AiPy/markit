@@ -15,11 +15,15 @@ opacity = 100
 
 
 def open_wm_png():
+    """Returns the logo/watermark image as PIL object"""
 
     return Image.open(files.png_file).convert("RGBA")
 
 
 def auto_logo_resizing(logo, img):
+    """Take Logo and Image object as arguments and resize logo according to the pic's ratio and return it.
+    Can also turn take adjust the size percentage according to user's input.
+    By default, resize logo to 20% size of image"""
 
     scale_factor = logo_size / 100
     new_width = int(img.width * scale_factor)
@@ -30,6 +34,8 @@ def auto_logo_resizing(logo, img):
 
 
 def auto_logo_placement(logo, img):
+    """Place the logo on image according to the option user pic from drop down menu.
+    By default, it will place the image to Bottom-Right"""
 
     padding = 10
     place = placement
@@ -77,6 +83,8 @@ def auto_logo_placement(logo, img):
 
 
 def auto_logo_transparency(logo):
+    """Make the logo transparent according to user input.
+    By default, logo is 100% visible."""
 
     transparency = opacity / 100
 
@@ -89,6 +97,10 @@ def auto_logo_transparency(logo):
 
 
 def batch_test():
+    """Take first image from the input folder that user selected and
+        give place the logo on it on default settings if user didn't
+        select custom settings and open that image after processing it in
+        the default pic viewer of user's computer."""
 
     if files.output_folder and files.png_file and files.input_imgs_list:
 
@@ -105,6 +117,9 @@ def batch_test():
 
 
 def img_processing():
+    """One by one edit all image from input folder that user selected and process it by putting
+        logo on in with default settings if user didn't set any and save them in output folder
+        user selected one by one."""
 
     logo = open_wm_png()
     os.startfile(files.output_folder)
