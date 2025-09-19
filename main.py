@@ -1,19 +1,12 @@
 import gui
 
-import files_utils as files
-
 def main():
 
-    gui.startup_window()
+    gui.startup_window() #Run startup window from gui.py
 
-    gui.folder_selector_window()
-    # print(f"Selected folder: {files.input_folder}")
-    print(f"{len(files.input_imgs_list)} images total.")
-    print(f"Files list from folder selected: {files.input_imgs_list}")
-    print(f"PNG Image Path: {files.png_file}")
-    print(f"Final folder to save images: {files.output_folder}")
+    gui.folder_selector_window() #Run folder selector window from gui.py
 
-    gui.final_window()
+    gui.final_window() #Run final window from gui.py
 
 
 if __name__ == "__main__":
