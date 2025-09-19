@@ -30,7 +30,7 @@ def img_list():
     """Validate all the supported images and save them in the global variable list."""
 
     global input_imgs_list
-    
+
     while True:
         folder = filedialog.askdirectory()
         input_imgs_list.clear()
