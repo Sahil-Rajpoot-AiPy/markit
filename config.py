@@ -1,13 +1,18 @@
-DEFAULT_INPUT_DIR = "data/input"
+import sys, os
 
-DEFAULT_OUTPUT_DIR = "data/output"
+def resource_path(relative_path: str) -> str:
+    """Get absolute path to resource, works for dev and PyInstaller onefile"""
+    if hasattr(sys, "_MEIPASS"):
+        return os.path.join(sys._MEIPASS, relative_path)
+    return os.path.join(os.path.abspath("."), relative_path)
 
+# Paths
+ICON_PATH = resource_path("data/markit_icon.ico")
+LOGO_PATH = resource_path("data/markit_logo.png")
+CONFIG_FILE = resource_path("data/config.json")
+HOME_IMG_PATH = resource_path("data/mark_it_start_page.png")
+
+# DEFAULT_INPUT_DIR = "data/input"
+# DEFAULT_OUTPUT_DIR = "data/output"
 ALLOWED_EXTENSIONS = (".png", ".jpg", ".jpeg", ".webp", ".bmp", ".bm", ".bitmap", ".tiff", ".tif")
-
 APP_TITLE = "MarkIt"
-
-ICON_PATH = "data/markit_icon.png"
-
-LOGO_PATH = "data/markit_logo.png"
-
-HOME_IMG_PATH = "data/mark_it_start_page.png"
