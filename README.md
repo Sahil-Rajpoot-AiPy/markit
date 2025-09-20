@@ -1,10 +1,20 @@
 # MarkIt
 
-Contact & support: [aipyfusion@gmail.com](mailto:aipyfusion@gmail.com)
+## Table of Contents
+- [Quick facts](#quick-facts)
+- [Features](#features)
+- [Video tutorial & Step-by-step GUI guide](#video-tutorial--step-by-step-gui-guide)
+- [For non-technical users](#for-non-technical-users)
+- [For developers](#for-developers)
+- [Requirements](#requirements)
+- [Troubleshooting (detailed)](#troubleshooting-detailed)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
 
 MarkIt is a lightweight desktop application that helps you add a consistent watermark or brand logo to many photos at once. It's built for small businesses, content creators, and photographers who need a fast, visual, and predictable way to protect or brand images in bulk without manually editing each file. MarkIt focuses on:
 
-- simplicity: a straight-forward GUI for choosing images, a logo, and settings
+- simplicity: a straightforward GUI for choosing images, a logo, and settings
 - control: pick placement, size, and transparency of the watermark
 - safety: the original images are not overwritten; processed copies are saved to a folder you choose
 
@@ -47,7 +57,7 @@ Both sets of instructions are below; non-technical guidance is first for conveni
 [Click here](https://youtube.com) for full video walkthrough — Recommended to watch video for 
     both non-technical and technical users can quickly understand the workflow.
 
-### **Step-by-step GUI guide with Screenshots:**
+### **Step-by-step GUI guide:**
 1. Welcome: When you run the application, a welcome window appears. Click the **Start** button to begin.
 2. Settings: A new window opens with settings. Titles marked with \* are **required**:
    - \*Select source folder: Choose the folder containing images you want to watermark.
@@ -63,6 +73,7 @@ Both sets of instructions are below; non-technical guidance is first for conveni
 
 ---
 
+<a id="for-non-technical-users"></a>
 ## For non-technical users — download, what to expect, and how to run the MarkIt.exe
 This section explains exactly what you will get from a GitHub Release ZIP and how to handle common first-run issues.
 
@@ -106,13 +117,14 @@ This section explains exactly what you will get from a GitHub Release ZIP and ho
 
 ---
 
+<a id="for-developers"></a>
 ## For developers / contributors — clone, run, test, and package
 This section explains how to run and tinker with the project from source.
 
 ### Clone and run (Windows examples)
 
 ```cmd
-git https://github.com/Sahil-Rajpoot-AiPy/markit.git
+git clone https://github.com/Sahil-Rajpoot-AiPy/markit.git
 cd markit
 ```
 
@@ -155,7 +167,7 @@ If you want to produce the Windows `.exe` used in Releases, PyInstaller is a com
 
 ```cmd
 pip install pyinstaller
-pyinstaller --noconfirm --onefile --windowed --add-data "data;data" --icon=data\markit_icon.ico MarkIt.py
+pyinstaller --noconfirm --onefile --windowed --add-data "data;data" --icon=data\markit_icon.ico --name MarkIt main.py
 ```
 
 ### Notes:
