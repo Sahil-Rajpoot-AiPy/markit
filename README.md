@@ -53,7 +53,7 @@ markit/
 ├── requirements.txt
 ├── README.md
 ├── data/
-│   ├── markit_icon.png
+│   ├── markit_icon.ico
 │   ├── markit_logo.png
 │   └── mark_it_start_page.png
 ```
@@ -66,6 +66,16 @@ MIT License
 Copyright (c) 2025 Saaleh Ijaz
 
 Permission is hereby granted...
+
+---
+
+This project is licensed under the GNU General Public License v3.0 (GPLv3).
+
+- You are free to use, modify, and share this software.
+- If you distribute it (modified or not), you must also make the source code available under the same license.
+- Proper credit must always be given.
+
+See the full license text in the [LICENSE](LICENSE) file.
 
 ## Contact
 For questions or support, contact [aipyfusion@gmail.com](mailto:aipyfusion@gmail.com)
