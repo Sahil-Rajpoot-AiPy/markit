@@ -19,6 +19,7 @@ class App(ctk.CTk):
     def __init__(self):
         super().__init__()
         self.geometry("600x600")  # Set initial window size
+        self.iconbitmap(config.ICON_PATH)  # Change window icon
         self.title("MarkIt")      # Set window title
         self.grid_columnconfigure(0, weight=1)  # Make column expandable
         self.protocol("WM_DELETE_WINDOW", sys.exit)  # Handle window close
