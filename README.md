@@ -65,4 +65,4 @@ Contributions are welcome! Please open issues or submit pull requests for improv
 This project is licensed under the MIT License.
 
 ## Contact
-For questions or support, contact [your.email@example.com](mailto:your.email@example.com)
+For questions or support, contact [aipyfusion@gmail.com](mailto:aipyfusion@gmail.com)
