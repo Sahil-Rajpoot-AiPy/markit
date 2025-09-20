@@ -1,6 +1,6 @@
 # MarkIt
 
-Contact & support: aipyfusion@gmail.com
+Contact & support: [aipyfusion@gmail.com](mailto:aipyfusion@gmail.com)
 
 MarkIt is a lightweight desktop application that helps you add a consistent watermark or brand logo to many photos at once. It's built for small businesses, content creators, and photographers who need a fast, visual, and predictable way to protect or brand images in bulk without manually editing each file. MarkIt focuses on:
 
@@ -48,109 +48,101 @@ Both sets of instructions are below; non-technical guidance is first for conveni
     both non-technical and technical users can quickly understand the workflow.
 
 ### **Step-by-step GUI guide with Screenshots:**
-1. Start: launch the app and you'll see a start page with guidance.
-2. Select source folder: pick the folder that contains the images you want to watermark.
-3. Choose watermark: select your PNG logo file (transparent PNGs work best).
-4. Configure settings: pick placement (corners, center, sides), adjust scale, and set transparency.
-5. Preview: use the preview to confirm how a representative image will look.
-6. Output folder: choose where processed images will be saved.
-7. Run batch: click Start / Process to apply the watermark to the selected images.
-8. Confirm: a completion message appears and the processed files are in your output folder.
-
-Screenshots and example assets are included in the `data/` folder (e.g., `data/mark_it_start_page.png`).
+1. Welcome: When you run the application, a welcome window appears. Click the **Start** button to begin.
+2. Settings: A new window opens with settings. Titles marked with \* are **required**:
+   - \*Select source folder: Choose the folder containing images you want to watermark.
+   - \*Select watermark/logo: Pick a PNG file to use as your watermark or logo.
+   - \*Select output folder: Choose where processed images will be saved. **Do not use the same folder as your originals, or they will be overwritten.**
+3. Optional settings (default values provided, can be changed):
+   - Logo size (relative to each image)
+   - Logo transparency
+   - Logo placement
+4. Batch test: Click **Batch Test** to process the first image with your settings. The result opens in your default image viewer.
+5. Bulk processing: If you like the test result, click **Bulk Processing**. The app saves all processed images to your chosen output folder.
+6. Completion: After processing, a congratulatory window appears.
 
 ---
 
-## For non-technical users — download, what to expect, and how to run the Windows .exe
+## For non-technical users — download, what to expect, and how to run the MarkIt.exe
 This section explains exactly what you will get from a GitHub Release ZIP and how to handle common first-run issues.
 
-What the ZIP contains
+### What the ZIP contains
 - `MarkIt.exe` — a single executable you can run (no Python installation required)
 - `README.md` — this file
 - `LICENSE` — the project license
-- Optional: a `data/` folder with icons or example assets
 
-System requirements and size expectations
+### System requirements and size expectations
 - Windows 10/11 (64-bit recommended)
 - The executable is standalone but may require the Microsoft Visual C++ Redistributable (2015-2022) on some machines.
-- Typical download size: depends on build, but expect under ~100 MB for a onefile PyInstaller build.
+- Typical download size: depends on build, but expect under ~50 MB for a onefile PyInstaller build.
 
-How to download and run
-1. Open the Releases page: https://github.com/<your-username>/markit/releases
+### How to download and run
+1. Open the Releases page: https://github.com/Sahil-Rajpoot-AiPy/markit/releases
 2. Download the latest release ZIP (e.g., `MarkIt-x.y.z-win.zip`).
 3. Extract the ZIP: Right-click → "Extract All..." or use File Explorer to copy the folder to somewhere convenient (e.g., `C:\Users\<you>\Downloads\MarkIt`).
 4. Double-click `MarkIt.exe` to run.
 
-First-run Windows warnings and Defender guidance
+### First-run Windows warnings and Defender guidance
 - Windows SmartScreen or Defender may show a warning for unsigned apps. If you downloaded the file from this repository and trust it:
   - "Windows protected your PC" → click "More info" → "Run anyway".
 - Unblock the file: right-click `MarkIt.exe` → Properties → check "Unblock" if present → Apply.
 - If Defender quarantines the file, restore it and create an exclusion in Windows Security → Virus & threat protection → Manage settings → Exclusions. (Only do this for binaries you trust.)
 
-If the app doesn't start — quick checks
+### If the app doesn't start — quick checks
 - Make sure you extracted the ZIP before running (don't run from inside the compressed archive).
 - Install the Visual C++ Redistributable (2015-2022) from Microsoft if there's a missing DLL error.
 - Try right-click → Run as administrator once to see if permissions were the issue.
 
-Verify download integrity (optional but recommended)
-- If a SHA-256 hash is provided on the release page, verify in PowerShell:
-
-```powershell
-Get-FileHash -Algorithm SHA256 .\MarkIt.exe
-```
-
-Compare the displayed hash to the one in the release notes.
-
-Common problems and how to resolve them
+### Common problems and how to resolve them
 - SmartScreen / Defender warnings: use "More info" → "Run anyway" or unblock via Properties.
 - Antivirus false positive: upload the `.exe` to VirusTotal; if it's a false positive, file a report with the vendor and restore/white-list locally.
 - App crashes immediately: extract before running; check Event Viewer → Windows Logs → Application for error details.
 - GUI freezes on processing certain files: try a small sample set to isolate problematic files. Re-save problem images (e.g., re-export from an editor) and try again.
 - Corrupted download: delete the ZIP, re-download from Releases and extract again.
 
-Need help? Support & contact (non-technical users)
-- Open an issue on GitHub: https://github.com/<your-username>/markit/issues
-- Or email: aipyfusion@gmail.com — include OS version, the exact steps you took, and any error text or screenshots.
+### Need help? Support & contact (non-technical users)
+- Open an issue on GitHub: https://github.com/Sahil-Rajpoot-AiPy/markit/issues
+- Or email: [aipyfusion@gmail.com](mailto:aipyfusion@gmail.com) — include OS version, the exact steps you took, and any error text or screenshots.
 
 ---
 
 ## For developers / contributors — clone, run, test, and package
 This section explains how to run and tinker with the project from source.
 
-Clone and run (Windows examples)
+### Clone and run (Windows examples)
 
 ```cmd
-git clone https://github.com/<your-username>/markit.git
+git https://github.com/Sahil-Rajpoot-AiPy/markit.git
 cd markit
 ```
 
-Create and activate a virtual environment
+### Create and activate a virtual environment
 
 ```cmd
 python -m venv .venv
 .venv\Scripts\activate
 ```
 
-Install dependencies
+### Install dependencies
 
 ```cmd
 pip install -r requirements.txt
 ```
 
-Run the app
+### Run the app
 
 ```cmd
 python main.py
 ```
 
-Run tests (project includes `test_main.py` / `test.py`)
+### Run tests (project includes `test_main.py` / `test.py`)
 
 ```cmd
 pip install pytest
 pytest -q
 ```
 
-Project layout and important files
+### Project layout and important files
 - `main.py` — application entry point
 - `gui.py` — GUI code
 - `img_utils.py` — image-processing helpers
@@ -163,26 +155,13 @@ If you want to produce the Windows `.exe` used in Releases, PyInstaller is a com
 
 ```cmd
 pip install pyinstaller
-pyinstaller --noconfirm --onefile --windowed --add-data "data;data" --icon=data\markit_icon.ico main.py
+pyinstaller --noconfirm --onefile --windowed --add-data "data;data" --icon=data\markit_icon.ico MarkIt.py
 ```
 
-Notes:
+### Notes:
 - `--onefile` creates a single `.exe`; `--windowed` hides the Console window.
 - `--add-data "data;data"` copies the `data` folder into the app bundle (Windows uses `;` separator).
-- After PyInstaller finishes, pick the `.exe` from `dist\main.exe` or rename it to `MarkIt.exe` and bundle it into a ZIP for Releases.
-
-Create a release ZIP (PowerShell example)
-
-```powershell
-Compress-Archive -Path .\dist\MarkIt.exe, .\README.md, .\LICENSE -DestinationPath .\MarkIt-x.y.z-win.zip -Force
-```
-
-License and forks — what you must know
-- This repository includes the GNU GPLv3 license (`LICENSE`). If you fork or redistribute binaries, you must honor the GPLv3 terms (keep the license, provide source on request, etc.). See `LICENSE` for full details.
-
-Contributing
-- Open issues for bugs or feature requests.
-- Submit pull requests for fixes and enhancements. Please include tests for behavior you add or change.
+- After PyInstaller finishes, pick the `.exe` from `dist\` folder and use it as you want without touching code.
 
 ---
 
@@ -200,9 +179,13 @@ Contributing
 
 ## Contributing
 Contributions are welcome! Please open issues or submit pull requests for improvements or bug fixes.
+- Open issues for bugs or feature requests.
+- Submit pull requests for fixes and enhancements. Please include tests for behavior you add or change.
+
+
 
 ## License
-MIT License
+GNU GPLv3 License
 Copyright (c) 2025 Saaleh Ijaz
 
 Permission is hereby granted...
