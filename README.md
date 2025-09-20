@@ -62,7 +62,10 @@ markit/
 Contributions are welcome! Please open issues or submit pull requests for improvements or bug fixes.
 
 ## License
-This project is licensed under the MIT License.
+MIT License
+Copyright (c) 2025 Saaleh Ijaz
+
+Permission is hereby granted...
 
 ## Contact
 For questions or support, contact [aipyfusion@gmail.com](mailto:aipyfusion@gmail.com)
