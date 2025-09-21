@@ -54,7 +54,7 @@ Both sets of instructions are below; non-technical guidance is first for conveni
 
 ### **Video tutorial**
 
-[Click here](https://youtube.com) for full video walkthrough — Recommended to watch video for 
+[Click here](https://youtu.be/wek7LdY5kps) for full video walkthrough — Recommended to watch video for 
     both non-technical and technical users can quickly understand the workflow.
 
 ### **Step-by-step GUI guide:**

@@ -6,6 +6,10 @@ What is MarkIt?
 MarkIt is a lightweight desktop app that lets you add a watermark or brand logo
 to many images at once. Simple, visual, and safe — your original files are never overwritten.
 
+Youtube Demo
+---------------
+https://youtu.be/wek7LdY5kps
+
 How to Run
 ----------
 1. Extract this ZIP file somewhere (e.g., Desktop or Downloads).
