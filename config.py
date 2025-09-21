@@ -12,7 +12,5 @@ LOGO_PATH = resource_path("data/markit_logo.png")
 CONFIG_FILE = resource_path("data/config.json")
 HOME_IMG_PATH = resource_path("data/mark_it_start_page.png")
 
-# DEFAULT_INPUT_DIR = "data/input"
-# DEFAULT_OUTPUT_DIR = "data/output"
 ALLOWED_EXTENSIONS = (".png", ".jpg", ".jpeg", ".webp", ".bmp", ".bm", ".bitmap", ".tiff", ".tif")
 APP_TITLE = "MarkIt"
