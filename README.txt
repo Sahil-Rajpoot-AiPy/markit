@@ -49,6 +49,10 @@ License
 MarkIt is free software licensed under the GNU General Public License v3.0 (GPLv3).
 See LICENSE for details.
 
+Author
+-------
+Created by Saaleh Ijaz.
+
 Support
 -------
 - Issues: https://github.com/Sahil-Rajpoot-AiPy/markit/issues

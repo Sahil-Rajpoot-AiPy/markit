@@ -212,5 +212,12 @@ This project is licensed under the GNU General Public License v3.0 (GPLv3).
 
 See the full license text in the [LICENSE](LICENSE) file.
 
+---
+
+## Author
+Created by Saaleh Ijaz.
+
+---
+
 ## Contact
 For questions or support, contact [aipyfusion@gmail.com](mailto:aipyfusion@gmail.com)
