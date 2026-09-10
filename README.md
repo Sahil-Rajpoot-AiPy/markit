@@ -1,223 +1,155 @@
 # MarkIt
 
-## Table of Contents
-- [Quick facts](#quick-facts)
-- [Features](#features)
-- [Video tutorial & Step-by-step GUI guide](#video-tutorial--step-by-step-gui-guide)
-- [For non-technical users](#for-non-technical-users)
-- [For developers](#for-developers)
-- [Requirements](#requirements)
-- [Troubleshooting (detailed)](#troubleshooting-detailed)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
+**Batch watermarking for businesses, creators, and photographers.**
 
-MarkIt is a lightweight desktop application that helps you add a consistent watermark or brand logo to many photos at once. It's built for small businesses, content creators, and photographers who need a fast, visual, and predictable way to protect or brand images in bulk without manually editing each file. MarkIt focuses on:
+MarkIt is a lightweight desktop application for applying a consistent logo or watermark to many images at once. It was built to make repetitive image branding faster, visual, and easier for non-technical users.
 
-- simplicity: a straightforward GUI for choosing images, a logo, and settings
-- control: pick placement, size, and transparency of the watermark
-- safety: the original images are not overwritten; processed copies are saved to a folder you choose
+## Why MarkIt
 
-What MarkIt does (short)
-- Input: a folder of images (PNG/JPG/WEBP/BMP/TIFF)
-- Watermark: a PNG logo (transparent PNGs recommended)
-- Output: processed copies saved to a folder you choose
-- Controls: placement (corners/center/sides), scale, and transparency; plus a preview before bulk processing
+Adding a logo manually to dozens or hundreds of images is repetitive and easy to get wrong. MarkIt turns that workflow into a few simple steps:
 
----
+1. Choose a folder of images
+2. Select a watermark/logo
+3. Choose placement, size, and transparency
+4. Preview the result
+5. Process the entire batch
 
-This README targets two audiences:
+Processed copies are saved to an output folder you choose, so your source images can remain untouched when you use a separate destination folder.
 
-1) Non-technical users — download a ready-to-run ZIP and run the `.exe` (fast start)
-2) Developers / Contributors — fork, run from source, or build releases
+## Key features
 
-Both sets of instructions are below; non-technical guidance is first for convenience.
+- Batch watermarking for multiple images
+- PNG/JPG/JPEG/WEBP/BMP/TIFF support
+- Nine watermark placement positions
+- Adjustable watermark size
+- Adjustable transparency
+- Preview before bulk processing
+- User-selected output folder
+- Desktop GUI built for non-technical users
+- Windows executable option for users without Python
 
----
+## Demo
 
-## Quick facts
-- Supported image formats: PNG, JPG, JPEG, WEBP, BMP, TIFF
-- Platform: 
-  - Windows desktop app for non-technical users.
-  - Runs on any system with Python 3.8+ for technical users.
+[Watch the video walkthrough on YouTube](https://youtu.be/wek7LdY5kps)
 
-## Features
-- Bulk watermarking of images
-- Custom logo placement (corners, center, sides)
-- Adjustable logo size and transparency
-- Preview before applying
-- Save processed images to a chosen output folder
+## Tech stack
 
----
+- Python
+- CustomTkinter
+- Pillow
+- PyInstaller
+- pytest
 
-## Video tutorial & Step-by-step GUI guide
+## Project structure
 
-### **Video tutorial**
+```text
+markit/
+├── main.py          # Application entry point
+├── gui.py           # Desktop interface
+├── img_utils.py     # Image-processing logic
+├── files_utils.py   # File and folder helpers
+├── config.py        # Application configuration
+├── test_main.py     # Automated tests
+├── data/            # Icons and application assets
+└── requirements.txt
+```
 
-[Click here](https://youtu.be/wek7LdY5kps) for full video walkthrough — Recommended to watch video for 
-    both non-technical and technical users can quickly understand the workflow.
+## Run from source
 
-### **Step-by-step GUI guide:**
-1. Welcome: When you run the application, a welcome window appears. Click the **Start** button to begin.
-2. Settings: A new window opens with settings. Titles marked with \* are **required**:
-   - \*Select source folder: Choose the folder containing images you want to watermark.
-   - \*Select watermark/logo: Pick a PNG file to use as your watermark or logo.
-   - \*Select output folder: Choose where processed images will be saved. **Do not use the same folder as your originals, or they will be overwritten.**
-3. Optional settings (default values provided, can be changed):
-   - Logo size (relative to each image)
-   - Logo transparency
-   - Logo placement
-4. Batch test: Click **Batch Test** to process the first image with your settings. The result opens in your default image viewer.
-5. Bulk processing: If you like the test result, click **Bulk Processing**. The app saves all processed images to your chosen output folder.
-6. Completion: After processing, a congratulatory window appears.
+### 1. Clone the repository
 
----
-
-<a id="for-non-technical-users"></a>
-## For non-technical users — download, what to expect, and how to run the MarkIt.exe
-This section explains exactly what you will get from a GitHub Release ZIP and how to handle common first-run issues.
-
-### What the ZIP contains
-- `MarkIt.exe` — a single executable you can run (no Python installation required)
-- `README.md` — this file
-- `LICENSE` — the project license
-
-### System requirements and size expectations
-- Windows 10/11 (64-bit recommended)
-- The executable is standalone but may require the Microsoft Visual C++ Redistributable (2015-2022) on some machines.
-- Typical download size: depends on build, but expect under ~50 MB for a onefile PyInstaller build.
-
-### How to download and run
-1. Open the Releases page: https://github.com/Sahil-Rajpoot-AiPy/markit/releases
-2. Download the latest release ZIP (e.g., `MarkIt-x.y.z-win.zip`).
-3. Extract the ZIP: Right-click → "Extract All..." or use File Explorer to copy the folder to somewhere convenient (e.g., `C:\Users\<you>\Downloads\MarkIt`).
-4. Double-click `MarkIt.exe` to run.
-
-### First-run Windows warnings and Defender guidance
-- Windows SmartScreen or Defender may show a warning for unsigned apps. If you downloaded the file from this repository and trust it:
-  - "Windows protected your PC" → click "More info" → "Run anyway".
-- Unblock the file: right-click `MarkIt.exe` → Properties → check "Unblock" if present → Apply.
-- If Defender quarantines the file, restore it and create an exclusion in Windows Security → Virus & threat protection → Manage settings → Exclusions. (Only do this for binaries you trust.)
-
-### If the app doesn't start — quick checks
-- Make sure you extracted the ZIP before running (don't run from inside the compressed archive).
-- Install the Visual C++ Redistributable (2015-2022) from Microsoft if there's a missing DLL error.
-- Try right-click → Run as administrator once to see if permissions were the issue.
-
-### Common problems and how to resolve them
-- SmartScreen / Defender warnings: use "More info" → "Run anyway" or unblock via Properties.
-- Antivirus false positive: upload the `.exe` to VirusTotal; if it's a false positive, file a report with the vendor and restore/white-list locally.
-- App crashes immediately: extract before running; check Event Viewer → Windows Logs → Application for error details.
-- GUI freezes on processing certain files: try a small sample set to isolate problematic files. Re-save problem images (e.g., re-export from an editor) and try again.
-- Corrupted download: delete the ZIP, re-download from Releases and extract again.
-
-### Need help? Support & contact (non-technical users)
-- Open an issue on GitHub: https://github.com/Sahil-Rajpoot-AiPy/markit/issues
-- Or email: [aipyfusion@gmail.com](mailto:aipyfusion@gmail.com) — include OS version, the exact steps you took, and any error text or screenshots.
-
----
-
-<a id="for-developers"></a>
-## For developers / contributors — clone, run, test, and package
-This section explains how to run and tinker with the project from source.
-
-### Clone and run (Windows examples)
-
-```cmd
+```bash
 git clone https://github.com/Sahil-Rajpoot-AiPy/markit.git
 cd markit
 ```
 
-### Create and activate a virtual environment
+### 2. Create a virtual environment
 
-```cmd
+**Windows**
+
+```bash
 python -m venv .venv
 .venv\Scripts\activate
 ```
 
-### Install dependencies
+**Linux/macOS**
 
-```cmd
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+### 3. Install dependencies
+
+```bash
 pip install -r requirements.txt
 ```
 
-### Run the app
+### 4. Run MarkIt
 
-```cmd
+```bash
 python main.py
 ```
 
-### Run tests (project includes `test_main.py` / `test.py`)
+## Using the app
 
-```cmd
-pip install pytest
-pytest -q
-```
+1. Launch MarkIt and click **Start**.
+2. Select the folder containing the images you want to process.
+3. Choose a PNG watermark or logo. Transparent PNGs work best.
+4. Select an output folder. For maximum safety, use a different folder from the source images.
+5. Adjust watermark size, transparency, and placement.
+6. Use **Batch Test** to preview the settings on one image.
+7. If the result looks right, run **Bulk Processing**.
 
-### Project layout and important files
-- `main.py` — application entry point
-- `gui.py` — GUI code
-- `img_utils.py` — image-processing helpers
-- `files_utils.py` — folder/file helpers
-- `config.py` — app configuration
-- `data/` — icons and example images
+## Windows executable
 
-Packaging an executable (PyInstaller example)
-If you want to produce the Windows `.exe` used in Releases, PyInstaller is a common choice. Example command (run inside your virtual environment on Windows):
+A standalone Windows build can be produced with PyInstaller:
 
-```cmd
+```bash
 pip install pyinstaller
 pyinstaller --noconfirm --onefile --windowed --add-data "data;data" --icon=data\markit_icon.ico --name MarkIt main.py
 ```
 
-### Notes:
-- `--onefile` creates a single `.exe`; `--windowed` hides the Console window.
-- `--add-data "data;data"` copies the `data` folder into the app bundle (Windows uses `;` separator).
-- After PyInstaller finishes, pick the `.exe` from `dist\` folder and use it as you want without touching code.
+The generated executable will be placed in the `dist` directory.
 
----
+Users downloading an unsigned executable may see a Windows SmartScreen warning. Only run binaries downloaded from a source you trust.
 
-## Requirements
-- Python 3.8+
-- See `requirements.txt` for exact packages (e.g., Pillow, customtkinter)
+## Tests
 
-## Troubleshooting (detailed)
-- Windows SmartScreen: choose "More info" → "Run anyway".
-- Missing DLL errors: install the Visual C++ Redistributable (2015-2022).
-- Antivirus quarantine: restore and add an exclusion locally if you trust the binary; report false positive to vendor.
-- GUI hang or crash: isolate the image(s) causing the issue and include stack trace when opening an issue.
+```bash
+pip install pytest
+pytest -q
+```
 
----
+## What this project demonstrates
 
-## Contributing
-Contributions are welcome! Please open issues or submit pull requests for improvements or bug fixes.
-- Open issues for bugs or feature requests.
-- Submit pull requests for fixes and enhancements. Please include tests for behavior you add or change.
+MarkIt was built as a complete CS50P final project and demonstrates:
 
+- Desktop GUI development
+- Image manipulation and compositing
+- File-system workflows
+- Input validation and user feedback
+- Separation of GUI and processing logic
+- Testing
+- Packaging a Python application for end users
 
+## Future improvements
+
+Potential next steps include:
+
+- Drag-and-drop image selection
+- More flexible positioning controls
+- Saved watermark presets
+- Progress reporting for large batches
+- Improved cross-platform packaging
+- A more polished release workflow
 
 ## License
-GNU GPLv3 License
-Copyright (c) 2025 Saaleh Ijaz
 
-Permission is hereby granted...
-
----
-
-This project is licensed under the GNU General Public License v3.0 (GPLv3).
-
-- You are free to use, modify, and share this software.
-- If you distribute it (modified or not), you must also make the source code available under the same license.
-- Proper credit must always be given.
-
-See the full license text in the [LICENSE](LICENSE) file.
-
----
+MarkIt is licensed under the **GNU General Public License v3.0 (GPL-3.0)**. See [LICENSE](LICENSE) for the full license text.
 
 ## Author
-Created by Saaleh Ijaz.
 
----
+Created by **Saaleh Ijaz**.
 
-## Contact
-For questions or support, contact [aipyfusion@gmail.com](mailto:aipyfusion@gmail.com)
+For questions or feedback, open a GitHub issue or contact: [aipyfusion@gmail.com](mailto:aipyfusion@gmail.com)
